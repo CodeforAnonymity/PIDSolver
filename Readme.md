@@ -46,5 +46,3 @@ Due to GitHub's 25 MB file size limit, the dataset is **not** included in this
 The full codebase will be made publicly available upon acceptance of the paper.
 
 ---
-
-If you have any questions or encounter issues, please feel free to open an issue or contact the authors.
