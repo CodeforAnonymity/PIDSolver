@@ -2,18 +2,49 @@
 
 ## Overview
 
-This repository contains a simplified implementation accompanying the paper:  
-**"A Physics-Informed Denoising Diffusion Approach for Enhanced AC Optimal Power Flow Solutions"**.  
+This repository provides a simplified implementation of the method described in the paper:  
+**"PIDSolver: A Sequential Physics-Informed Diffusion Solver for Optimization with Algebraic Constraints"**.
 
-Because of GitHub’s 25 MB file size limit, the dataset is not included in this repository. However, users can generate their own data by running the `Data_Generator.jl` script.
+Due to GitHub's 25 MB file size limit, the dataset is **not** included in this repository. However, users can generate their own training and test data by running the `Data_Generator.jl` script.
+
+---
 
 ## Repository Contents
 
-- **`Data_Generator.jl`** – Generates the training and test datasets for the AC Optimal Power Flow (ACOPF) problem.  
-- **`Distribution_Display.py`** – Visualizes the distribution of the generated data.  
-- **`Check_ACPF_Balance.py`** – Verifies the correctness of the generated data by checking power flow balance.  
-- **`PIDDPM-ACOPF_Solver-torch.py`** – Main training and evaluation script. Running this will produce results for the IEEE 118-bus system similar to those reported in the paper.  
+| File | Description |
+|------|-------------|
+| `Data_Generator.jl` | Generates training and test datasets for the AC Optimal Power Flow (ACOPF) problem. |
+| `Check_ACPF_Balance.py` | Verifies the correctness of the generated data by checking power‑flow balance constraints. |
+| `PIDDPM-ACOPF_Solver-torch.py` | Main training and evaluation script. Running this file produces results for the IEEE 118‑bus system, similar to those reported in the paper. |
 
-## Requirements
+---
 
-The code is written in Python (with PyTorch) and Julia (for data generation). Please ensure you have the necessary dependencies installed (e.g., PyTorch, NumPy, Matplotlib, and Julia with appropriate packages).
+## Getting Started
+
+1. **Generate data**  
+   Run the Julia script to create your own datasets:
+   ```bash
+   julia Data_Generator.jl
+   ```
+
+2. **Verify data correctness** (optional)  
+   Use the Python script to confirm that the generated power‑flow cases satisfy the balance equations:
+   ```bash
+   python Check_ACPF_Balance.py
+   ```
+
+3. **Train and evaluate the solver**  
+   Execute the main PyTorch script to reproduce the IEEE 118‑bus results:
+   ```bash
+   python PIDDPM-ACOPF_Solver-torch.py
+   ```
+
+---
+
+## Complete Code Release
+
+The full codebase will be made publicly available upon acceptance of the paper.
+
+---
+
+If you have any questions or encounter issues, please feel free to open an issue or contact the authors.
