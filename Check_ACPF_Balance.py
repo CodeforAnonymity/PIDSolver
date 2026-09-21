@@ -210,31 +210,31 @@ def power_flow_equations_evaluation(case118, state, action, q_u_delta):
 
  
 case118 = case118()
-X_con_test_ = []
-with open("./Dataset/X_con_118_test.txt", "r") as f:
+X_con_train_ = []
+with open("./Dataset/X_con_118_train.txt", "r") as f:
     for line in f.readlines():
         _data = line.split()
-        X_con_test_.append([float(_i) for _i in _data])
+        X_con_train_.append([float(_i) for _i in _data])
 
-X_in_test_ = []
-with open("./Dataset/X_in_118_test.txt", "r") as f:
+X_in_train_ = []
+with open("./Dataset/X_in_118_train.txt", "r") as f:
     for line in f.readlines():
         _data = line.split()
-        X_in_test_.append([float(_i) for _i in _data])
+        X_in_train_.append([float(_i) for _i in _data])
 
-X_other_information_test_ = []
-with open("./Dataset/X_other_information_118_test.txt", "r") as f:
+X_other_information_train_ = []
+with open("./Dataset/X_other_information_118_train.txt", "r") as f:
     for line in f.readlines():
         _data = line.split()
-        X_other_information_test_.append([float(_i) for _i in _data])
+        X_other_information_train_.append([float(_i) for _i in _data])
 
 
 
-X_in_test = np.array(X_in_test_)
-X_in_test[:,:54] = X_in_test[:,:54]/100
-X_con_test = np.array(X_con_test_)/100
+X_in_train = np.array(X_in_train_)
+X_in_train[:,:54] = X_in_train[:,:54]/100
+X_con_train = np.array(X_con_train_)/100
 
-X_other_information_test = np.array(X_other_information_test_)
+X_other_information_train = np.array(X_other_information_train_)
 
 base_p_error = 0
 base_q_error = 0
@@ -246,9 +246,9 @@ base_line_error = 0
 
 num_buses = case118['bus'].shape[0]
 
-for i in range(X_con_test.shape[0]):
-    # print(X_other_information_test[i,:])
-    _temp_p, _temp_q, _temp_cost, _temp_active, _temp_reactive, _temp_voltage, _temp_line = power_flow_equations_evaluation(case118, X_con_test[i,:], X_in_test[i,:], X_other_information_test[i,:])
+for i in range(X_con_train.shape[0]):
+    # print(X_other_information_train[i,:])
+    _temp_p, _temp_q, _temp_cost, _temp_active, _temp_reactive, _temp_voltage, _temp_line = power_flow_equations_evaluation(case118, X_con_train[i,:], X_in_train[i,:], X_other_information_train[i,:])
     base_p_error += _temp_p
     base_q_error += _temp_q
     base_cost_error += _temp_cost
@@ -258,6 +258,6 @@ for i in range(X_con_test.shape[0]):
     base_line_error += _temp_line
     # break
 
-_temp_shape = X_con_test.shape[0]
+_temp_shape = X_con_train.shape[0]
 # _temp_shape = 1
 print("BASE error: ",base_p_error/_temp_shape," ",base_q_error/_temp_shape," ",base_cost_error/_temp_shape," ",base_active_error/_temp_shape," ",base_reactive_error/_temp_shape," ",base_voltage_error/_temp_shape," ",base_line_error/_temp_shape)
